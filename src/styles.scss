@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import './app/material-theme.scss';
+
+@font-face {
+  font-family: 'Didact-Gothic';
+  src: url('./assets/fonts/DidactGothic-Regular.ttf');
+  font-weight: 400;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Didact-Gothic';
+}

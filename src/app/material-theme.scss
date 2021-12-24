@@ -1,0 +1,43 @@
+@import '~@angular/material/theming';
+@import './colors.scss';
+@include mat-core();
+
+$mat-ono-primary: (
+  50 : $neon-red,
+  100 : $neon-red,
+  200 : $neon-red,
+  300 : $neon-red,
+  400 : $neon-red,
+  500 : $neon-red,
+  600 : $neon-red,
+  700 : $neon-red,
+  800 : $neon-red,
+  900 : $neon-red,
+  A100 : $neon-red,
+  A200 : $neon-red,
+  A400 : $neon-red,
+  A700 : $neon-red,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$neon-primary: mat-palette($mat-ono-primary);
+$neon-accent: mat-palette($mat-ono-primary);
+$neon-warn: mat-palette($mat-ono-primary);
+
+$neon-theme: mat-light-theme($neon-primary, $neon-accent, $neon-warn);
+@include angular-material-theme($neon-theme);
