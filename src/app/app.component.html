@@ -36,7 +36,7 @@
   </form>
 </aside>
 
-<div class="products">
+<div *ngIf="products.length > 0; else noProducts" class="products">
   <mat-card class="product" *ngFor="let product of products">
     <mat-card-title>
       <span>{{ product.id }}</span>
@@ -47,3 +47,7 @@
     <p>Section: {{ product.section }}</p>
   </mat-card>
 </div>
+
+<ng-template #noProducts>
+  <p class="no-products" *ngIf="products.length === 0">No Products Found</p>
+</ng-template>

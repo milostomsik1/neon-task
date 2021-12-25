@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs';
-import { Product } from './common/models/product.model';
+import { Product, ProductFilters } from './common/models/product.model';
 import { ProductService } from './common/services/product.service';
 
 @Component({
@@ -11,42 +11,42 @@ import { ProductService } from './common/services/product.service';
 })
 export class AppComponent implements OnInit {
   products: Product[] = [];
+  floors: number[] = [];
+  sections: number[] = [];
+
   filters = new FormGroup({
-    id: new FormControl(''),
-    floors: new FormControl([]),
-    sections: new FormControl([]),
+    id: new FormControl(),
+    floors: new FormControl(),
+    sections: new FormControl(),
   });
 
   constructor(private readonly productService: ProductService) {}
 
-  get floors(): number[] {
-    return this.products.map(product => product.floor).filter((val, i, arr) => arr.indexOf(val) === i);
-  }
-
-  get sections(): number[] {
-    return this.products.map(product => product.section).filter((val, i, arr) => arr.indexOf(val) === i);
-  }
-
   ngOnInit(): void {
     this.productService.getProducts().subscribe(products => this.products = products);
+    this.productService.getSections().subscribe(sections => this.sections = sections);
+    this.productService.getFloors().subscribe(floors => this.floors = floors);
+    
     this.filters.valueChanges
-      .pipe(
-        switchMap(value => {
-          console.log(value);
-          const filters = { };
-          return this.productService.getProducts();
-        })
-      )
-      .subscribe(products => {
-        this.products = products;
-        console.log(this.products);
-      });
+      .pipe(switchMap(form => this.productService.getProducts(this.getFilters(form))))
+      .subscribe(products => this.products = products);
   }
 
-  // searchById(partialId: string, products: Product[]): Observable<Product[]> {
-  //   return of(products)
-  //     .pipe(
-  //       map(products => products.filter(product => product.id.includes(partialId.trim()))),
-  //     );
-  // }
+  private getFilters(form: any): ProductFilters | undefined {
+    const { id, floors, sections } = form;
+    const hasFilters = id || floors || sections;
+    const filters: ProductFilters = { };
+
+    if (id) {
+      filters.id = id;
+    }
+    if (floors) {
+      filters.floors = floors;
+    }
+    if (sections) {
+      filters.sections = sections;
+    }
+
+    return hasFilters ? filters : undefined;
+  }
 }

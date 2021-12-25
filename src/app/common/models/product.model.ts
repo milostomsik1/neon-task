@@ -5,4 +5,8 @@ export interface Product {
   quantity: number;
 }
 
-export interface ProductFilters extends Partial<Product> { }
+export interface ProductFilters {
+  id?: string;
+  floors?: number[];
+  sections?: number[];
+}
