@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { createMask } from '@ngneat/input-mask';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -12,11 +13,13 @@ export class AddEditProductComponent implements OnInit {
   isEditing = false;
 
   product = new FormGroup({
-    code: new FormControl(null),
+    code: new FormControl(null, [Validators.required]),
     quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
     floor: new FormControl(null, [Validators.required, Validators.min(1)]),
     section: new FormControl(null, [Validators.required, Validators.min(1)]),
   });
+
+  codeMask = createMask('A{2,4} 9{4,6}');
 
   constructor(
     public dialogRef: MatDialogRef<AddEditProductComponent>,
@@ -39,5 +42,17 @@ export class AddEditProductComponent implements OnInit {
   updateProduct(): void {
     const product = this.product.getRawValue();
     this.productService.updateProduct(product).subscribe(() => this.close('update'));
+  }
+
+  addProduct(): void {
+    this.productService.addProduct(this.product.value)
+      .subscribe(
+        () => this.close('add'),
+        error => {
+          if (error) {
+            this.product.get('code')?.setErrors({ code: error });
+          }
+        }
+      );
   }
 }

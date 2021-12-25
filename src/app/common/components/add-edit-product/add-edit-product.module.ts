@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { AddEditProductComponent } from './add-edit-product.component';
+import { InputMaskModule } from '@ngneat/input-mask';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AddEditProductComponent } from './add-edit-product.component';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    InputMaskModule,
   ],
   exports: [
     AddEditProductComponent,

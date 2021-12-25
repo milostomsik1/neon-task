@@ -1,6 +1,6 @@
 
 <aside>
-  <button class="new-product" color="primary" mat-flat-button>Create New Product</button>
+  <button class="new-product" color="primary" mat-flat-button (click)="addEditProduct()">Create New Product</button>
 
   <form [formGroup]="filters">
     <section class="code-search">

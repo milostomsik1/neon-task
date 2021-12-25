@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, throwError } from 'rxjs';
 import { Product, ProductFilters } from '../models/product.model';
 
 @Injectable({providedIn: 'root'})
@@ -23,6 +23,12 @@ export class ProductService {
       floor: 5,
       section: 3
     },
+    {
+      code: 'MS 2244',
+      quantity: 9,
+      floor: 2,
+      section: 2
+    },
   ];
   
   getProducts(filters?: ProductFilters): Observable<Product[]> {
@@ -37,6 +43,7 @@ export class ProductService {
             .map(product => product.floor)
             // return unique values only
             .filter((val, i, arr) => arr.indexOf(val) === i)
+            .sort((a, b) => a - b)
         })
       );
   }
@@ -49,6 +56,7 @@ export class ProductService {
           .map(product => product.section)
           // return unique values only
           .filter((val, i, arr) => arr.indexOf(val) === i)
+          .sort((a, b) => a - b)
       })
     );
   }
@@ -67,7 +75,21 @@ export class ProductService {
     return of(product);
   }
 
+  addProduct(product: Product): Observable<Product> {
+    const codeTaken = this.products.find(p => p.code === product.code);
+
+    if (!codeTaken) {
+      this.products.push(product);
+      return of(product);
+    } else {
+      return throwError('Code Already Taken');
+    }
+  }
+
   private filterProducts(products: Product[], filters?: ProductFilters): Product[] {
+    // something like https://github.com/nextapps-de/flexsearch could be used here,
+    // but in best case scenario Backend would handle this
+
     if (!filters) {
       return products;
     } else {
