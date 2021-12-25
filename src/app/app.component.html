@@ -3,11 +3,11 @@
   <button class="new-product" color="primary" mat-flat-button>Create New Product</button>
 
   <form [formGroup]="filters">
-    <section class="id-search">
+    <section class="code-search">
       <header>Product Code</header>
       <div class="content">
         <mat-form-field class="search" appearance="outline">
-          <input matInput type="text" formControlName="id">
+          <input matInput type="text" formControlName="code">
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
       </div>
@@ -39,12 +39,11 @@
 <div *ngIf="products.length > 0; else noProducts" class="products">
   <mat-card class="product" *ngFor="let product of products">
     <mat-card-title>
-      <span>{{ product.id }}</span>
-      <button mat-icon-button><mat-icon>edit</mat-icon></button>
+      <span>{{ product.code }}</span>
+      <button mat-icon-button (click)="addEditProduct(product)"><mat-icon>edit</mat-icon></button>
     </mat-card-title>
     <p>Quantity: {{ product.quantity }}</p>
-    <p>Floor: {{ product.floor }}</p>
-    <p>Section: {{ product.section }}</p>
+    <p>Location: {{ product.floor }} / {{ product.section }}</p>
   </mat-card>
 </div>
 

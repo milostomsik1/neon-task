@@ -1,12 +1,12 @@
 export interface Product {
-  id: string;
+  code: string;
+  quantity: number;
   floor: number;
   section: number;
-  quantity: number;
 }
 
 export interface ProductFilters {
-  id?: string;
+  code?: string;
   floors?: number[];
   sections?: number[];
 }

@@ -1,4 +1,10 @@
-@import './app/material-theme.scss';
+@import "./app/material-theme.scss";
+@import "./app/colors.scss";
+
+::selection {
+  background-color: $neon-pink;
+  color: $white;
+}
 
 @font-face {
   font-family: 'Didact-Gothic';

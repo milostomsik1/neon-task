@@ -1,0 +1,53 @@
+@import "../../../colors.scss";
+
+:host {
+  display: block;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  input, button {
+    font-size: 16px;
+  }
+
+  button  {
+    min-width: 100px;
+  }
+
+  button:first-of-type {
+    margin-right: 16px;
+  }
+
+  button[mat-stroked-button]:not(:disabled) {
+    background: linear-gradient(to right, $neon-red, $neon-pink);
+    color: $white;
+  }
+
+  ::ng-deep mat-label {
+    color: $black;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+    color: $black;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused.ng-invalid.ng-touched .mat-form-field-outline {
+    color: $neon-red;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.ng-invalid.ng-touched mat-label {
+    color: $neon-red;
+  }
+
+  ::ng-deep .mat-ripple-element {
+    background-color: rgba($neon-red, 0.25);
+  }
+}

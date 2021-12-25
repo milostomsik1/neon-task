@@ -1,10 +1,5 @@
 @import './colors.scss';
 
-::selection {
-  background-color: $neon-red;
-  color: $white;
-}
-
 :host {
   display: flex;
   width: 100%;
@@ -15,7 +10,8 @@
     min-height: 100%;
     padding: 24px;
     overflow-y: auto;
-    flex: 0 315px;
+    flex: 1 0 315px;
+    max-width: 315px;
     flex-direction: column;
 
     .new-product {
@@ -102,6 +98,7 @@
       width: 100%;
       background: linear-gradient(to right, $neon-red, $neon-pink);
       color: $white;
+      font-size: 16px;
     }
   }
 
