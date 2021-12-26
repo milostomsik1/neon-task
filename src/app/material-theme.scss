@@ -2,7 +2,7 @@
 @import './colors.scss';
 @include mat-core();
 
-$mat-ono-primary: (
+$mat-neon-primary: (
   50 : $neon-red,
   100 : $neon-red,
   200 : $neon-red,
@@ -35,9 +35,9 @@ $mat-ono-primary: (
   )
 );
 
-$neon-primary: mat-palette($mat-ono-primary);
-$neon-accent: mat-palette($mat-ono-primary);
-$neon-warn: mat-palette($mat-ono-primary);
+$neon-primary: mat-palette($mat-neon-primary);
+$neon-accent: mat-palette($mat-neon-primary);
+$neon-warn: mat-palette($mat-neon-primary);
 
 $neon-theme: mat-light-theme($neon-primary, $neon-accent, $neon-warn);
 @include angular-material-theme($neon-theme);

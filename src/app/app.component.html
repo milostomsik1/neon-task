@@ -1,4 +1,3 @@
-
 <aside>
   <button class="new-product" color="primary" mat-flat-button (click)="addEditProduct()">Create New Product</button>
 
@@ -47,6 +46,7 @@
   </mat-card>
 </div>
 
+<!-- We would also use loaders here if we had real BE calls or delayed service response -->
 <ng-template #noProducts>
-  <p class="no-products" *ngIf="products.length === 0">No Products Found</p>
+  <p class="no-products" *ngIf="products.length === 0">No Products Found.</p>
 </ng-template>

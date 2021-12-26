@@ -32,6 +32,8 @@ export class ProductService {
   ];
   
   getProducts(filters?: ProductFilters): Observable<Product[]> {
+    // BE could also return something like { data: products, meta: { floors, sections } }
+    // so we avoid calls for floors and sections
     return of(this.products).pipe(map(products => this.filterProducts(products, filters)));
   }
 
@@ -89,7 +91,6 @@ export class ProductService {
   private filterProducts(products: Product[], filters?: ProductFilters): Product[] {
     // something like https://github.com/nextapps-de/flexsearch could be used here,
     // but in best case scenario Backend would handle this
-
     if (!filters) {
       return products;
     } else {
