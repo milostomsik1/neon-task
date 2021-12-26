@@ -29,6 +29,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initWarehouse();
+    // with a real BE we would debounce the API calls to only make a call once user stops typing
+    // in this case we would separate code search and floor/section subscription
+    // because only the typing needs to be debounced and floor/section is a click and doesn't need it
     this.filters.valueChanges
       .pipe(switchMap(form => this.productService.getProducts(this.getFilters(form))))
       .subscribe(products => this.products = products);
@@ -43,7 +46,7 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(type => {
       if (type !== 'cancel') {
-        this.initWarehouse();
+        this.initWarehouse(this.getFilters(this.filters.value));
       }
     });
   }
@@ -66,8 +69,8 @@ export class AppComponent implements OnInit {
     return hasFilters ? filters : undefined;
   }
 
-  initWarehouse(): void {
-    this.productService.getProducts().subscribe(products => this.products = products);
+  initWarehouse(filters?: ProductFilters): void {
+    this.productService.getProducts(filters).subscribe(products => this.products = products);
     this.productService.getSections().subscribe(sections => this.sections = sections);
     this.productService.getFloors().subscribe(floors => this.floors = floors);
   }
