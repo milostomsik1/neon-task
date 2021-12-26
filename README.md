@@ -1,6 +1,7 @@
 # Neon
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+Built on top of Node V16 LTS.
 
 ## Development server
 
