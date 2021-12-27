@@ -103,6 +103,7 @@
 
   main {
     display: flex;
+    flex: 1 auto;
     flex-direction: column;
     background-color: rgba($black, 0.05);
   }
@@ -112,7 +113,6 @@
     align-items: start;
     height: 100%;
     overflow-y: auto;
-    flex: 1 auto;
     padding: 12px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: min-content;
