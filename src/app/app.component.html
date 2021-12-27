@@ -35,18 +35,21 @@
   </form>
 </aside>
 
-<div *ngIf="products.length > 0; else noProducts" class="products">
-  <mat-card class="product" *ngFor="let product of products">
-    <mat-card-title>
-      <span>{{ product.code }}</span>
-      <button mat-icon-button (click)="addEditProduct(product)"><mat-icon>edit</mat-icon></button>
-    </mat-card-title>
-    <p>Quantity: {{ product.quantity }}</p>
-    <p>Location: {{ product.floor }} / {{ product.section }}</p>
-  </mat-card>
-</div>
-
-<!-- We would also use loaders here if we had real BE calls or delayed service response -->
-<ng-template #noProducts>
-  <p class="no-products" *ngIf="products.length === 0">No Products Found.</p>
-</ng-template>
+<main>
+  <span *ngIf="products.length > 0" class="total-products">{{ products.length }} products</span>
+  <div *ngIf="products.length > 0; else noProducts" class="products">
+    <mat-card class="product" *ngFor="let product of products">
+      <mat-card-title>
+        <span>{{ product.code }}</span>
+        <button mat-icon-button (click)="addEditProduct(product)"><mat-icon>edit</mat-icon></button>
+      </mat-card-title>
+      <p>Quantity: {{ product.quantity }}</p>
+      <p>Location: {{ product.floor }} / {{ product.section }}</p>
+    </mat-card>
+  </div>
+  
+  <!-- We would also use loaders here if we had real BE calls or delayed service response -->
+  <ng-template #noProducts>
+    <p class="no-products" *ngIf="products.length === 0">No Products Found.</p>
+  </ng-template>
+</main>
